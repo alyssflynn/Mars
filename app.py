@@ -24,7 +24,8 @@ def scraper():
         mars_info,
         upsert=True
     )
-    return redirect("http://localhost:5000/", code=302)
+    return redirect("/", code=302)
+    # return redirect("http://localhost:5000/", code=302)
     # return redirect(url_for('index'))
 
 if __name__=="__main__":
