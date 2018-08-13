@@ -5,8 +5,7 @@ import requests
 import pandas as pd
 import splinter
 from splinter import Browser
-import tweepy
-from config import consumer_key, consumer_secret, access_token, access_token_secret
+# import tweepy
 
 
 def scrape():
