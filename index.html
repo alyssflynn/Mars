@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mars</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/style.css">
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <div class="jumbotron">
+            <h1>Mission to Mars</h1>
+            <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape new data!</a></p>
+
+        </div>
+
+        <div class="sigline">
+                <p>
+                  Alyss Flynn | Unversity of Texas at Austin : Data Analytics & Visualization |
+                </p>
+        </div>
+            <div class = "row">  
+                <div class="col-md-12">
+                        <div class="card" style="width: 20rem;">
+                            <div class="card-body">
+                                <h4 class="card-title">Latest Mars News</h3>
+                                <h6 class="card-subtitle mb-2 text-muted"><em></em>{{ mars_data.Mars_news_title }}</em></h4>
+                                <p class="card-text">{{ mars_data.Mars_news_summary }}</p>
+                            </div>
+                        </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-8" width="400">
+                    <h4>Featured Mars Image from JPL.</h4>
+                    <img src="{{mars_data.Mars_featured_image}}" alt="Mars featured image" />
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="border-box">
+                        <div class="col-md-12">
+                            <h6>Current Weather on Mars</h6>
+                            <p>{{ mars_data.Mars_weather }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="table">
+                        {{ mars_data.Mars_hemisphere | safe }}
+                    </div>
+                </div>
+                    
+            
+            
+            </div>
+            
+
+    </div>
+
+</body>
+
+</html>
