@@ -10,7 +10,7 @@ from splinter import Browser
 
 def scrape():
     executable_path = {'executable_path': '/Users/alyss/chromedriver'}
-    browser = Browser('chrome', **executable_path, headless=True)
+    browser = Browser('chrome', **executable_path, headless=False)
     
     mars_data = {}
     
