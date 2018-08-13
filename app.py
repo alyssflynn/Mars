@@ -1,3 +1,10 @@
+import os
+import time
+from bs4 import BeautifulSoup as bs
+import pandas as pd
+import splinter
+from splinter import Browser
+
 from flask import Flask, render_template, jsonify, redirect, url_for
 from flask_pymongo import PyMongo
 import scrape_mars
