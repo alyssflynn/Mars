@@ -7,13 +7,16 @@ app.config["MONGO_URI"] = "mongodb://localhost:27017/app"
 
 mongo = PyMongo(app)
 
-
+# Route to render index.html
 @app.route("/")
-def index():
+def home():
+    # get data
     mars_data = mongo.db.mars_data.find_one()
-    print(mars_data)
+
+    # return template and data
     return render_template("index.html", mars_data=mars_data)
 
+# Route to trigger scrape function
 @app.route("/scrape")
 def scrape():
     mars_data = mongo.db.mars_data
