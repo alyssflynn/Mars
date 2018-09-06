@@ -11,8 +11,11 @@ from splinter import Browser
 def scrape():
     executable_path = {'executable_path': './chromedriver'}
     browser = Browser('chrome', **executable_path, headless=False)
+<<<<<<< HEAD
     
     mars_data = {}
+=======
+>>>>>>> parent of 167f0fd... ?
     
     # Scrape nasa news site
     browser.visit("https://mars.nasa.gov/news/")
