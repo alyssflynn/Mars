@@ -1,39 +1,48 @@
 import os
-import time
-from bs4 import BeautifulSoup as bs
-import pandas as pd
-import splinter
-from splinter import Browser
-
-from flask import Flask, render_template, jsonify, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for
 from flask_pymongo import PyMongo
-import scrape_mars
+import pymongo
+from pymongo import MongoClient
+from scrape_mars import scrape
 
-# Create an instance of our Flask app
+MONGO_URL = "mongodb://localhost:27017/app"
+
+client = MongoClient(MONGO_URL)
+# db = client.app105690057
+db = client.mars
+collection = db.scraped
+
 app = Flask(__name__)
-app.config["MONGO_URI"] = "mongodb://localhost:27017/app"
+app.config["MONGO_URI"] = MONGO_URL
 
+# app.config["MONGO_URI"] = "mongodb://localhost:27017/app"
+# app.config["MONGO_URI"] = "mongodb://localhost:27017/app"
+# app.config["MONGO_URI"] = "mongodb://localhost:27017/mars"
 mongo = PyMongo(app)
 
-# Route to render index.html
+
+# conn = "mongodb://localhost:27017/mars"
+# conn = "mongodb://localhost:27017"
+# client = MongoClient(conn)
+# collections = db.scraped
+# collections = mongo.db.scraped
+
+
 @app.route("/")
-def index():
-    mars_data = mongo.db.mars_data.find_one()
+def home():
+    mars_data = mongo.db.mars.find_one()
+    # mars_data = collection.find_one()
     return render_template("index.html", mars_data=mars_data)
 
 # Route to trigger scrape function
 @app.route("/scrape")
 def scraper():
-    mars_data = mongo.db.mars_data
-    mars_info = scrape_mars.scrape()
-    mars_data.update(
-        {},
-        mars_info,
-        upsert=True
-    )
-    return redirect("/", code=302)
-    # return redirect("http://localhost:5000/", code=302)
-    # return redirect(url_for('index'))
+    new_mars_data = scrape()
+    # collection.insert_one(new_mars_data)
+    mongo.db.mars.insert_one(new_mars_data)
+    return redirect('/')
+
 
 if __name__=="__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port, debug=True)
