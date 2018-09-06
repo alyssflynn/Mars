@@ -13,7 +13,7 @@ def scrape():
     # -------------------------------------
     # Setup browser
     executable_path = {'executable_path': './chromedriver'}
-    browser = Browser('chrome', **executable_path, headless=False)
+    browser = Browser('chrome', **executable_path, headless=True)
     
     # -------------------------------------
     # Scrape nasa news site
